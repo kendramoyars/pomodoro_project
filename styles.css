@@ -51,14 +51,14 @@ height: 100vh;
   text-align: center;
   font-size: 1.4rem;
   text-transform: uppercase;
-  color: #555;
+  color: rgb(92, 91, 91);
 }
 
 .breakCount {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   text-transform: uppercase;
-  letter-spacing: .2rem;
+  letter-spacing: .1rem;
 }
 .btns {
   display: flex;
@@ -107,3 +107,4 @@ i {
 .secLbl {
   padding-left: 1.1rem;
 }
+
