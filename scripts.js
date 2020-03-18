@@ -7,9 +7,10 @@ const pauseButton = document.querySelector('.btn-pause');
 const stopButton = document.querySelector('.btn-stop');
 let breakCount = 0;
 let paused = false;
+let stopped = false;
 let time_left;
 let timeInterval;
-const time_in_minutes = 1;
+const time_in_minutes = 25;
 const current_time = Date.parse(new Date());
 let deadline = new Date(current_time + time_in_minutes * 60 * 1000);
 timeDisplay.textContent = `${time_in_minutes}:00`;
@@ -48,16 +49,28 @@ function pause_clock() {
 }
 
 function stop_clock() {
-  paused = true;
-  clearInterval(timeInterval);
-  timeDisplay.textContent = `${time_in_minutes}:00`
+  if(!stopped) {
+    paused = true;
+    clearInterval(timeInterval);
+    stopped = true;
+    stopButton.style.color = 'red';
+  }
 }
 
 function startTimer(e) {
   if(paused) {
     paused = false;
-    deadline = new Date(Date.parse(new Date()) + time_left);
-    run_clock(deadline);
+    if (stopped) {
+      stopped = false;
+      stopButton.style.color = 'white';
+      deadline = new Date(Date.parse(new Date()) + time_in_minutes * 60 * 1000);
+      run_clock(deadline);
+    } else {
+      deadline = new Date(Date.parse(new Date()) + time_left);
+      run_clock(deadline);
+    }
+    
+    
   } else if (timeInterval == null){
     run_clock(deadline);
   }
