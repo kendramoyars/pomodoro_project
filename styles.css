@@ -92,31 +92,41 @@ body {
   font-weight: 600;
 }
 
-.btn:hover i {
+.btn:hover ion-icon {
   margin-right: 2rem;
 }
 
 .btn:hover .pausePlay {
-  margin-right: .4rem;
-  transform: scale(1.2);
+  transform: scale(1.1);
   
+}
+.btn:hover .play {
+  margin-right: -.4rem;
+}
+
+.btn:hover .pause {
+  margin-right: 0;
 }
 
 .btn:focus {
   outline: none;
 }
 
-  i {
+ion-icon {
   display: inline-block;
   margin-right: 1.5rem;
-  font-size: 2.1rem;
+  font-size: 1.8rem;
   vertical-align: text-top;
-  margin-top: -4px;
   transition: all 0.3s;
+  margin-top: 1px;
 }
 
-.pausePlay {
-margin-right: .4rem;
+.pause{
+  margin-right: 0;
+}
+
+.play{
+  margin-right: -1rem;
 }
 
 .secLbl {
@@ -125,11 +135,12 @@ margin-right: .4rem;
 
 .pause-clicked {
   color: red;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .play-clicked {
-  transform: scale(1.2);
+  transform: scale(1.1);
+  margin-right: -.4rem;
 }
 
 .button-clicked {

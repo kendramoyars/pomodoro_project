@@ -58,14 +58,17 @@ function displayEndTime(timestamp) {
 }
 
 function startTimer() {
+  pauseIcon.classList.remove("pause-clicked");
+  playIcon.classList.remove("play-clicked");
   isPaused = false;
   seconds = parseInt(this.dataset.time);
-  if(this.textContent == "Work") {
+  const cleanText = this.textContent.replace(/\s/g, '');
+  if(cleanText == "Work") {
     title.textContent = "work";
-  } else if (this.textContent == "Break") {
+  } else if (cleanText == "Break") {
     title.textContent = "break";
     breakCount = breakCount + 1;
-    if(breakCount >= 4) {
+    if(breakCount > 4) {
       breakCount = 0;
       seconds = parseInt(longBreak);
     }
