@@ -1,82 +1,89 @@
-
+let countdown;
+let isPaused;
+let secondsLeft = 0;
+let seconds;
+let breakCount = 0;
+const longBreak = 900; // 15 minutes in seconds
 const title = document.querySelector('.title');
 const timeDisplay = document.querySelector('.time');
-const breakDisplay = document.querySelector('.breakVal');
-const playButton = document.querySelector('.btn-play');
+const endTime = document.querySelector('.endTime');
 const pauseButton = document.querySelector('.btn-pause');
-const stopButton = document.querySelector('.btn-stop');
-let breakCount = 0;
-let paused = false;
-let stopped = false;
-let time_left;
-let timeInterval;
-const time_in_minutes = 25;
-const current_time = Date.parse(new Date());
-let deadline = new Date(current_time + time_in_minutes * 60 * 1000);
-timeDisplay.textContent = `${time_in_minutes}:00`;
-
-function time_remaining(endtime) {
-  const t = Date.parse(endtime) - Date.parse(new Date());
-  let seconds = Math.floor( (t/1000) % 60);
-  let minutes = Math.floor((t/1000/60) % 60);
-  return {
-    'total': t,
-    'minutes': minutes,
-    'seconds': seconds
-  };
-}
+const buttons = document.querySelectorAll('[data-time]');
 
 
-function run_clock(endtime) {
-  function update_clock() {
-    let t = time_remaining(endtime);
-    timeDisplay.textContent = `${t.minutes}:${t.seconds}`;
-    if(t.total <= 0) {
-      clearInterval(timeInterval);
+function timer(seconds) {
+  // clear existing timers
+  clearInterval(countdown);
+
+  const now = Date.now();
+  const then = now + seconds * 1000;
+  displayTimeLeft(seconds);
+  displayEndTime(then);
+
+  countdown = setInterval(() => {
+    if (!isPaused) {
+      secondsLeft = Math.round((then - Date.now()) / 1000);
     }
-  }
-  update_clock();
-  timeInterval = setInterval(update_clock, 1000);
+
+    // check if we should stop it!
+    if(secondsLeft < 0) {
+      clearInterval(countdown);
+      return;
+    }
+
+    // display it
+    displayTimeLeft(secondsLeft);
+  }, 1000);
 }
 
-function pause_clock() {
-  if (!paused) {
-    paused = true;
-    clearInterval(timeInterval); // stop the clock
-    time_left = time_remaining(deadline).total;
-  
-  }
+function displayTimeLeft(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const remainderSeconds = seconds % 60;
+  const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
+  document.title = display;
+  timeDisplay.textContent = display;
 }
 
-function stop_clock() {
-  if(!stopped) {
-    paused = true;
-    clearInterval(timeInterval);
-    stopped = true;
-    stopButton.style.color = 'red';
-  }
+function displayEndTime(timestamp) {
+  const end = new Date(timestamp);
+  const hour = end.getHours();
+  const adjustedHour = hour > 12 ? hour - 12 : hour;
+  const minutes = end.getMinutes();
+  endTime.textContent = `End At ${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes}`;
 }
 
-function startTimer(e) {
-  if(paused) {
-    paused = false;
-    if (stopped) {
-      stopped = false;
-      stopButton.style.color = 'white';
-      deadline = new Date(Date.parse(new Date()) + time_in_minutes * 60 * 1000);
-      run_clock(deadline);
-    } else {
-      deadline = new Date(Date.parse(new Date()) + time_left);
-      run_clock(deadline);
+function startTimer() {
+  isPaused = false;
+  seconds = parseInt(this.dataset.time);
+  if(this.textContent == "Work") {
+    title.textContent = "work";
+  } else if (this.textContent == "Break") {
+    title.textContent = "break";
+    breakCount = breakCount + 1;
+    if(breakCount >= 4) {
+      breakCount = 0;
+      seconds = parseInt(longBreak);
     }
     
-    
-  } else if (timeInterval == null){
-    run_clock(deadline);
   }
+  
+  
+  timer(seconds);
+}
+
+function pauseTimer() {
+  if (countdown != undefined) {
+    if(!isPaused) {
+      isPaused = true;
+      clearInterval(countdown);
+    } else if (isPaused) {
+      isPaused = false;
+      seconds = secondsLeft;
+      timer(seconds);
+    }
+  } 
   
 }
 
-playButton.addEventListener('click', startTimer);
-pauseButton.addEventListener('click', pause_clock);
-stopButton.addEventListener('click', stop_clock);
+pauseButton.addEventListener('click', pauseTimer);
+buttons.forEach(button => button.addEventListener('click', startTimer));

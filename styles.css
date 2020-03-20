@@ -54,7 +54,7 @@ height: 100vh;
   color: rgb(92, 91, 91);
 }
 
-.breakCount {
+.endTime {
   text-align: center;
   font-size: 2.2rem;
   text-transform: uppercase;
@@ -90,21 +90,35 @@ height: 100vh;
 .btn:hover i {
   margin-right: 2rem;
 }
+.btn:hover .pausePlay {
+  margin-right: .3rem;
+  color: red;
+  transform: scale(1.2);
+}
 
 .btn:focus {
   outline: none;
 }
 
-i {
+ i{
   display: inline-block;
   transition: margin 0.3s;
   margin-right: 1.5rem;
   font-size: 2.1rem;
   vertical-align: text-top;
   margin-top: -4px;
-  transition: margin 0.3s;
+  transition: all 0.3s;
 }
+
+.pausePlay {
+margin-right: .3rem;
+}
+
 .secLbl {
   padding-left: 1.1rem;
+}
+
+.stop-clicked {
+  margin-right: 2rem;
 }
 

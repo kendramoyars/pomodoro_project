@@ -12,19 +12,20 @@
 <div class="container">
   <div class="clock">
     <div class="row">
-      <h1 class="title">Work</h1>
+      <h1 class="title">Start</h1>
     </div>
     <div class="row">
       <p class="time">00:00</p>
       <p class="timeLbl">min <span class="secLbl">sec</span></p>
     </div>
     <div class="row btns">
-      <button class="btn btn-play" alt="Play"><i class="ion-ios-play-outline"></i>Play</button>
-      <button class="btn btn-pause" alt="Pause"><i class="ion-ios-pause-outline"></i>Pause</button>
-      <button class="btn btn-stop" alt="Stop"><i class="ion-ios-stopwatch-outline"></i>Stop</button>
+      <button data-time="1500" class="btn btn-work" alt="Work"><i class="ion-ios-briefcase-outline"></i>Work</button>
+      <button class="btn btn-pause" alt="Pause"><i class="ion-ios-play-outline pausePlay"></i><i
+          class="ion-ios-pause-outline pausePlay"></i></button>
+      <button data-time="300" class="btn btn-break" alt="Break"><i class="ion-ios-stopwatch-outline"></i>Break</button>
     </div>
     <div class="row">
-      <p class="breakCount">Breaks Taken: <span class="breakVal">0</span></p>
+      <p class="endTime"></p>
     </div>
 
   </div>
