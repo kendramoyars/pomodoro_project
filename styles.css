@@ -15,11 +15,12 @@ body {
   font-family: Lato, Arial, Helvetica, sans-serif;
   
 }
+
 .container {
- display: flex;
- justify-content: center;
- align-items: center;
-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .clock {
@@ -34,9 +35,9 @@ height: 100vh;
 
 .title {
   text-align: center;
-  font-size: 3.3rem;
+  font-size: 3rem;
   text-transform: uppercase;
-  letter-spacing: .1rem;
+  letter-spacing: .3rem;
   font-weight: normal;
   padding-bottom: 2rem;
 }
@@ -56,10 +57,12 @@ height: 100vh;
 
 .endTime {
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 2rem;
   text-transform: uppercase;
   letter-spacing: .1rem;
+  color: rgb(92, 91, 91);
 }
+
 .btns {
   display: flex;
   justify-content: space-evenly;
@@ -67,6 +70,7 @@ height: 100vh;
   padding-bottom: 1rem;
   padding: 2rem;
 }
+
 .btn {
   display: inline-block;
   text-align: center;
@@ -83,6 +87,7 @@ height: 100vh;
   
   
 }
+
 .btn:hover {
   font-weight: 600;
 }
@@ -90,19 +95,19 @@ height: 100vh;
 .btn:hover i {
   margin-right: 2rem;
 }
+
 .btn:hover .pausePlay {
-  margin-right: .3rem;
-  color: red;
+  margin-right: .4rem;
   transform: scale(1.2);
+  
 }
 
 .btn:focus {
   outline: none;
 }
 
- i{
+  i {
   display: inline-block;
-  transition: margin 0.3s;
   margin-right: 1.5rem;
   font-size: 2.1rem;
   vertical-align: text-top;
@@ -111,14 +116,22 @@ height: 100vh;
 }
 
 .pausePlay {
-margin-right: .3rem;
+margin-right: .4rem;
 }
 
 .secLbl {
   padding-left: 1.1rem;
 }
 
-.stop-clicked {
-  margin-right: 2rem;
+.pause-clicked {
+  color: red;
+  transform: scale(1.2);
 }
 
+.play-clicked {
+  transform: scale(1.2);
+}
+
+.button-clicked {
+  font-weight: 600;
+}

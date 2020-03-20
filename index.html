@@ -9,29 +9,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pomodoro Clock</title>
 </head>
-<div class="container">
-  <div class="clock">
-    <div class="row">
-      <h1 class="title">Start</h1>
-    </div>
-    <div class="row">
-      <p class="time">00:00</p>
-      <p class="timeLbl">min <span class="secLbl">sec</span></p>
-    </div>
-    <div class="row btns">
-      <button data-time="1500" class="btn btn-work" alt="Work"><i class="ion-ios-briefcase-outline"></i>Work</button>
-      <button class="btn btn-pause" alt="Pause"><i class="ion-ios-play-outline pausePlay"></i><i
-          class="ion-ios-pause-outline pausePlay"></i></button>
-      <button data-time="300" class="btn btn-break" alt="Break"><i class="ion-ios-stopwatch-outline"></i>Break</button>
-    </div>
-    <div class="row">
-      <p class="endTime"></p>
-    </div>
-
-  </div>
-</div>
 
 <body>
+  <div class="container">
+    <div class="clock">
+      <div class="row">
+        <h1 class="title">Pomodoro Timer</h1>
+      </div>
+      <div class="row">
+        <p class="time">00:00</p>
+        <p class="timeLbl">min <span class="secLbl">sec</span></p>
+      </div>
+      <div class="row btns">
+        <button data-time="1500" class="btn btn-work" alt="Work">
+          <i class="ion-ios-briefcase-outline"></i>Work
+        </button>
+        <button class="btn btn-pause" alt="Pause">
+          <i class="ion-ios-play-outline play pausePlay"></i>
+          <i class="ion-ios-pause-outline pause pausePlay"></i>
+        </button>
+        <button data-time="300" class="btn btn-break" alt="Break">
+          <i class="ion-ios-stopwatch-outline"></i>Break
+        </button>
+      </div>
+      <div class="row">
+        <p class="endTime">&nbsp;</p>
+      </div>
+    </div>
+  </div>
+
+
 
   <script src="scripts.js"></script>
 </body>

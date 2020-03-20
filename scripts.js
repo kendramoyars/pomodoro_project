@@ -7,9 +7,12 @@ const longBreak = 900; // 15 minutes in seconds
 const title = document.querySelector('.title');
 const timeDisplay = document.querySelector('.time');
 const endTime = document.querySelector('.endTime');
+const pauseIcon = document.querySelector('.pause');
+const playIcon = document.querySelector('.play');
 const pauseButton = document.querySelector('.btn-pause');
 const buttons = document.querySelectorAll('[data-time]');
-
+const alarm = document.createElement('audio');
+alarm.setAttribute("src", "https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3");
 
 function timer(seconds) {
   // clear existing timers
@@ -28,6 +31,8 @@ function timer(seconds) {
     // check if we should stop it!
     if(secondsLeft < 0) {
       clearInterval(countdown);
+      alarm.currentTime = 0;
+      alarm.play();
       return;
     }
 
@@ -49,7 +54,7 @@ function displayEndTime(timestamp) {
   const hour = end.getHours();
   const adjustedHour = hour > 12 ? hour - 12 : hour;
   const minutes = end.getMinutes();
-  endTime.textContent = `End At ${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes}`;
+  endTime.textContent = `Stop At ${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes}`;
 }
 
 function startTimer() {
@@ -64,10 +69,7 @@ function startTimer() {
       breakCount = 0;
       seconds = parseInt(longBreak);
     }
-    
   }
-  
-  
   timer(seconds);
 }
 
@@ -76,13 +78,18 @@ function pauseTimer() {
     if(!isPaused) {
       isPaused = true;
       clearInterval(countdown);
+      pauseIcon.classList.add("pause-clicked");
+      playIcon.classList.add("play-clicked");
+
     } else if (isPaused) {
       isPaused = false;
+      pauseIcon.classList.remove("pause-clicked");
+      playIcon.classList.remove("play-clicked");
+
       seconds = secondsLeft;
       timer(seconds);
     }
   } 
-  
 }
 
 pauseButton.addEventListener('click', pauseTimer);
